@@ -15,8 +15,11 @@ class AuthController extends Controller
     public function showFormLogin()
     {
         if (Auth::check()) { // true sekalian session field di users nanti bisa dipanggil via Auth
-            //Login Success
-            return redirect()->route('user.index');
+            if (Auth::user()->role == 'user') {
+                return redirect()->route('user.index');
+            } elseif (Auth::user()->role == 'admin') {
+                return redirect()->route('admin.index');
+            }
         }
         return view('auth.login');
     }

@@ -49,3 +49,7 @@ Route::middleware(['auth', 'user'])->group(function () {
     Route::post('/schedule/course', [UserController::class, 'storeCourse'])->name('user.storeCourse');
     Route::get('/tutor', [UserController::class, 'tutor'])->name('user.tutor');
 });
+
+Route::get('/{any}', function () {
+    return redirect()->route('login');
+})->where('any', '.*');
